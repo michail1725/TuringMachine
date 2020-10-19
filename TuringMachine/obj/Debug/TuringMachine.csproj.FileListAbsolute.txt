@@ -1,0 +1,10 @@
+E:\Проекты VS\TuringMachine\TuringMachine\bin\Debug\TuringMachine.exe.config
+E:\Проекты VS\TuringMachine\TuringMachine\bin\Debug\TuringMachine.exe
+E:\Проекты VS\TuringMachine\TuringMachine\bin\Debug\TuringMachine.pdb
+E:\Проекты VS\TuringMachine\TuringMachine\obj\Debug\TuringMachine.csprojAssemblyReference.cache
+E:\Проекты VS\TuringMachine\TuringMachine\obj\Debug\TuringMachine.Form1.resources
+E:\Проекты VS\TuringMachine\TuringMachine\obj\Debug\TuringMachine.Properties.Resources.resources
+E:\Проекты VS\TuringMachine\TuringMachine\obj\Debug\TuringMachine.csproj.GenerateResource.cache
+E:\Проекты VS\TuringMachine\TuringMachine\obj\Debug\TuringMachine.csproj.CoreCompileInputs.cache
+E:\Проекты VS\TuringMachine\TuringMachine\obj\Debug\TuringMachine.exe
+E:\Проекты VS\TuringMachine\TuringMachine\obj\Debug\TuringMachine.pdb
