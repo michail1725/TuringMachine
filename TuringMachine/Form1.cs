@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -24,10 +25,8 @@ namespace TuringMachine
         private void Confirm_Click(object sender, EventArgs e)
         {
             Output.Text = " " + BeginStatement.Text + " ";
-            Output.SelectionStart = 0;
-            Output.SelectionLength = 1;
-            Output.SelectionColor = Color.Green;
             Output.SelectAll();
+            Output.SelectionColor = Color.DarkCyan;
             Output.SelectionAlignment = HorizontalAlignment.Center;
             Output.DeselectAll();
             
@@ -43,6 +42,7 @@ namespace TuringMachine
             while (machine.memory_cache != "halt" && stillWorking) {
                 Thread.Sleep(Convert.ToInt32(delayBox.Text));
                 Output.Text = machine.DoInstruction(machine.memory_cache, Output.Text);
+                CurrState.Text = machine.memory_cache;
                 Output.SelectionStart = machine.position;
                 Output.SelectionLength = 1;
                 Output.SelectionColor = Color.Red;
@@ -50,9 +50,18 @@ namespace TuringMachine
                 Output.SelectionAlignment = HorizontalAlignment.Center;
                 Output.DeselectAll();
                 Application.DoEvents();
+                StepsCount.Text = "" + (Convert.ToInt32(StepsCount.Text) + 1);
             }
-            
-                
+            if (!stillWorking)
+            {
+                Output.SelectAll();
+                Output.SelectionColor = Color.Orange;
+            }
+            else {
+                Output.SelectAll();
+                Output.SelectionColor = Color.Green;
+            }
+
         }
 
         public void GetTrueCode() { 
@@ -87,7 +96,9 @@ namespace TuringMachine
                 }
             }
             machine.memory_cache = machine.instructions[0].initial_st;
+            CurrState.Text = machine.memory_cache;
             machine.position = 1;
+            StepsCount.Text = "" + 0;
         }
 
         private void DoStep_Click(object sender, EventArgs e)
@@ -98,20 +109,42 @@ namespace TuringMachine
             }
             else if (machine.memory_cache == "halt")
             {
+                Output.SelectAll();
+                Output.SelectionColor = Color.Green;
                 return;
             }
             Output.Text = machine.DoInstruction(machine.memory_cache, Output.Text);
+            CurrState.Text = machine.memory_cache;
             Output.SelectionStart = machine.position;
             Output.SelectionLength = 1;
             Output.SelectionColor = Color.Red;
             Output.SelectAll();
             Output.SelectionAlignment = HorizontalAlignment.Center;
             Output.DeselectAll();
+            StepsCount.Text = "" + (Convert.ToInt32(StepsCount.Text) + 1);
         }
 
         private void PauseCalc_Click(object sender, EventArgs e)
         {
             stillWorking = false;
+        }
+        
+        private void Reset_Click(object sender, EventArgs e)
+        {
+            stillWorking = false;
+            machine = new TheMachine();
+            StepsCount.Text = "" + 0;
+            Confirm_Click(sender, e);
+        }
+
+        private void LoadProgram_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ProgramText.Text = File.ReadAllText(openFileDialog1.FileName, Encoding.Default);
+            }
         }
     }
 

@@ -33,14 +33,14 @@
             this.BeginStatement = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.StartProgram = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.LoadProgram = new System.Windows.Forms.Button();
             this.DoStep = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.StepsCount = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.CurrState = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Reset = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.delayBox = new System.Windows.Forms.TextBox();
             this.Output = new System.Windows.Forms.RichTextBox();
@@ -52,6 +52,7 @@
             this.ProgramText.Location = new System.Drawing.Point(12, 62);
             this.ProgramText.Multiline = true;
             this.ProgramText.Name = "ProgramText";
+            this.ProgramText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ProgramText.Size = new System.Drawing.Size(418, 376);
             this.ProgramText.TabIndex = 1;
             // 
@@ -92,14 +93,15 @@
             this.StartProgram.UseVisualStyleBackColor = true;
             this.StartProgram.Click += new System.EventHandler(this.StartProgram_Click);
             // 
-            // button3
+            // LoadProgram
             // 
-            this.button3.Location = new System.Drawing.Point(440, 415);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(175, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Загрузить программу";
-            this.button3.UseVisualStyleBackColor = true;
+            this.LoadProgram.Location = new System.Drawing.Point(440, 415);
+            this.LoadProgram.Name = "LoadProgram";
+            this.LoadProgram.Size = new System.Drawing.Size(175, 23);
+            this.LoadProgram.TabIndex = 6;
+            this.LoadProgram.Text = "Загрузить программу";
+            this.LoadProgram.UseVisualStyleBackColor = true;
+            this.LoadProgram.Click += new System.EventHandler(this.LoadProgram_Click);
             // 
             // DoStep
             // 
@@ -156,14 +158,15 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Программа:";
             // 
-            // button1
+            // Reset
             // 
-            this.button1.Location = new System.Drawing.Point(440, 272);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(176, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Сброс";
-            this.button1.UseVisualStyleBackColor = true;
+            this.Reset.Location = new System.Drawing.Point(440, 272);
+            this.Reset.Name = "Reset";
+            this.Reset.Size = new System.Drawing.Size(176, 23);
+            this.Reset.TabIndex = 13;
+            this.Reset.Text = "Сброс";
+            this.Reset.UseVisualStyleBackColor = true;
+            this.Reset.Click += new System.EventHandler(this.Reset_Click);
             // 
             // label1
             // 
@@ -180,7 +183,7 @@
             this.delayBox.Name = "delayBox";
             this.delayBox.Size = new System.Drawing.Size(57, 20);
             this.delayBox.TabIndex = 15;
-            this.delayBox.Text = "1000";
+            this.delayBox.Text = "500";
             // 
             // Output
             // 
@@ -214,14 +217,14 @@
             this.Controls.Add(this.Output);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.delayBox);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Reset);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.CurrState);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.StepsCount);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.DoStep);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.LoadProgram);
             this.Controls.Add(this.StartProgram);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.BeginStatement);
@@ -242,14 +245,14 @@
         private System.Windows.Forms.TextBox BeginStatement;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button StartProgram;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button LoadProgram;
         private System.Windows.Forms.Button DoStep;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label StepsCount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label CurrState;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Reset;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox delayBox;
         private System.Windows.Forms.RichTextBox Output;
