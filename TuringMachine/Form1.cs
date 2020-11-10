@@ -14,7 +14,7 @@ namespace TuringMachine
     public partial class Form1 : Form
     {
         TheMachine machine = new TheMachine();
-        bool stillWorking;
+        bool stillWorking,reset = false;
         public Form1()
         {
             InitializeComponent();
@@ -24,7 +24,7 @@ namespace TuringMachine
         
         private void Confirm_Click(object sender, EventArgs e)
         {
-            Output.Text = " " + BeginStatement.Text + " ";
+            Output.Text = BeginStatement.Text;
             Output.SelectAll();
             Output.SelectionColor = Color.DarkCyan;
             Output.SelectionAlignment = HorizontalAlignment.Center;
@@ -43,24 +43,34 @@ namespace TuringMachine
                 Thread.Sleep(Convert.ToInt32(delayBox.Text));
                 Output.Text = machine.DoInstruction(machine.memory_cache, Output.Text);
                 CurrState.Text = machine.memory_cache;
-                Output.SelectionStart = machine.position;
-                Output.SelectionLength = 1;
-                Output.SelectionColor = Color.Red;
+                if (machine.position >= 0 && machine.position < Output.Text.Length)
+                {
+                    Output.SelectionStart = machine.position;
+                    Output.SelectionLength = 1;
+                    Output.SelectionColor = Color.Red;
+                }
                 Output.SelectAll();
                 Output.SelectionAlignment = HorizontalAlignment.Center;
                 Output.DeselectAll();
                 Application.DoEvents();
-                StepsCount.Text = "" + (Convert.ToInt32(StepsCount.Text) + 1);
+                if (!reset) {
+                    StepsCount.Text = "" + (Convert.ToInt32(StepsCount.Text) + 1);
+                }
             }
-            if (!stillWorking)
+            if (!reset)
             {
-                Output.SelectAll();
-                Output.SelectionColor = Color.Orange;
+                if (!stillWorking)
+                {
+                    Output.SelectAll();
+                    Output.SelectionColor = Color.Orange;
+                }
+                else
+                {
+                    Output.SelectAll();
+                    Output.SelectionColor = Color.Green;
+                }
             }
-            else {
-                Output.SelectAll();
-                Output.SelectionColor = Color.Green;
-            }
+            reset = false;
 
         }
 
@@ -97,7 +107,7 @@ namespace TuringMachine
             }
             machine.memory_cache = machine.instructions[0].initial_st;
             CurrState.Text = machine.memory_cache;
-            machine.position = 1;
+            machine.position = 0;
             StepsCount.Text = "" + 0;
         }
 
@@ -115,9 +125,12 @@ namespace TuringMachine
             }
             Output.Text = machine.DoInstruction(machine.memory_cache, Output.Text);
             CurrState.Text = machine.memory_cache;
-            Output.SelectionStart = machine.position;
-            Output.SelectionLength = 1;
-            Output.SelectionColor = Color.Red;
+            if (machine.position >= 0 && machine.position < Output.Text.Length)
+            {
+                Output.SelectionStart = machine.position;
+                Output.SelectionLength = 1;
+                Output.SelectionColor = Color.Red;
+            }
             Output.SelectAll();
             Output.SelectionAlignment = HorizontalAlignment.Center;
             Output.DeselectAll();
@@ -132,8 +145,10 @@ namespace TuringMachine
         private void Reset_Click(object sender, EventArgs e)
         {
             stillWorking = false;
+            reset = true;
             machine = new TheMachine();
             StepsCount.Text = "" + 0;
+            CurrState.Text = "";
             Confirm_Click(sender, e);
         }
 

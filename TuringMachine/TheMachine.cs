@@ -12,66 +12,86 @@ namespace TuringMachine
         public string memory_cache;
         public List<Statement> instructions = new List<Statement>();
         public int position;
-        public string DoInstruction(string mem,string output_line)
+        public string DoInstruction(string mem,string output_line)  
         {
-            bool noninstructions = false;
-            foreach (Statement st in instructions) {
-                if (st.initial_st == mem && st.body.first_arg == output_line[position])
+            foreach (Statement st in instructions)
+            {
+                if (position >= 0 && position < output_line.Length)
                 {
-                    string tmpline;
-                    if (st.body.second_arg != ' ')
+                    if (st.initial_st == mem && st.body.first_arg == output_line[position])
                     {
-                        if (position == output_line.Length-1)
-                        {
-                            tmpline = string.Concat(output_line.Substring(0, position), st.body.second_arg, output_line.Substring(position));
-                        }
-                        else
+                        string tmpline = "";
+                        if (position > 0 && position < output_line.Length - 1)
                         {
                             tmpline = string.Concat(output_line.Substring(0, position), st.body.second_arg, output_line.Substring(position + 1));
                         }
+                        if (position == output_line.Length - 1)
+                        {
+                            if (st.body.second_arg == ' ')
+                            {
+                                tmpline = output_line.Substring(0, position);
+                            }
+                            else
+                            {
+                                tmpline = string.Concat(output_line.Substring(0, position), st.body.second_arg);
+                            }
+                        }
+                        else if (position == 0)
+                        {
+                            if (st.body.second_arg == ' ')
+                            {
+                                tmpline = output_line.Substring(1, output_line.Length-1);
+                            }
+                            else {
+                                tmpline = string.Concat(st.body.second_arg, output_line.Substring(1, output_line.Length-1));
+                            }
+                            
+                        }
+
+                        if (st.body.dir == 'r')
+                        {
+                            if (position != 0 || st.body.second_arg != ' ') {
+                                position += 1;
+                            }
+                                
+                            
+                        }
+                        else if (st.body.dir == 'l')
+                        {
+                             position -= 1;
+                        }
+                        memory_cache = st.end_st;
+                        return tmpline;
                     }
-                    else
+                }
+                else {
+                    if (st.initial_st == mem && st.body.first_arg == ' ')
                     {
-                        if (position == output_line.Length-1)
+                        string tmpline;
+                        if (position < 0)
                         {
-                            tmpline = string.Concat(output_line.Substring(0, position), output_line.Substring(position));
+                            tmpline = string.Concat(st.body.second_arg, output_line);
+                            if (st.body.dir == 'r')
+                            {
+                                position += 2;
+                            }
                         }
-                        else
-                        {
-                            tmpline = string.Concat(output_line.Substring(0, position), output_line.Substring(position + 1));
+                        else {
+                            tmpline = string.Concat(output_line, st.body.second_arg);
+                            if (st.body.dir == 'l')
+                            {
+                                position -= 1;
+                            }
                         }
+                        
+                        memory_cache = st.end_st;
+                        return tmpline;
                     }
-                    if (st.body.dir == 'r' && st.body.second_arg != ' ')
-                    {
-                        if (position != tmpline.Length-1)
-                        {
-                            position += 1;
-                        }
-                        else
-                        {
-                            tmpline += ' ';
-                            position += 1;
-                        }
-                    }
-                    else if(st.body.dir == 'l')
-                    {
-                        if (position != 0)
-                        {
-                            position -= 1;
-                        }
-                        else
-                        {
-                            tmpline = ' ' + tmpline;
-                        }
-                    }
-                    memory_cache = st.end_st;
-                    return tmpline;
                 }
             }
-            if (noninstructions)
-            {
-                MessageBox.Show("Отсутствует инструкция " + mem + " для аргумента '" + output_line[position] + "'.");
-            }
+            
+            MessageBox.Show("Отсутствует инструкция " + mem + " для аргумента '" + output_line[position] + "'.");
+           
             return output_line;
         }
     }
