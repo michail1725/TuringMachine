@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using TuringMachine.Entities;
 
 namespace TuringMachine
 {
@@ -15,13 +14,12 @@ namespace TuringMachine
     {
         TheMachine machine = new TheMachine();
         bool stillWorking,reset = false;
+
         public Form1()
         {
             InitializeComponent();
-            
         }
-
-        
+                
         private void Confirm_Click(object sender, EventArgs e)
         {
             Output.Text = BeginStatement.Text;
@@ -29,48 +27,56 @@ namespace TuringMachine
             Output.SelectionColor = Color.DarkCyan;
             Output.SelectionAlignment = HorizontalAlignment.Center;
             Output.DeselectAll();
-            
+            StartProgram.Enabled = true;
+            DoStep.Enabled = true;
+            Reset.Enabled = true;
+            PauseCalc.Enabled = true;
         }
 
         private void StartProgram_Click(object sender, EventArgs e)
         {
-            if (machine.memory_cache == null)
-            {
-                GetTrueCode();
-            }
-            stillWorking = true;
-            while (machine.memory_cache != "halt" && stillWorking) {
-                Thread.Sleep(Convert.ToInt32(delayBox.Text));
-                Output.Text = machine.DoInstruction(machine.memory_cache, Output.Text);
-                CurrState.Text = machine.memory_cache;
-                if (machine.position >= 0 && machine.position < Output.Text.Length)
+            if (ProgramText.Text.Length != 0) {
+                if (machine.memory_cache == null)
                 {
-                    Output.SelectionStart = machine.position;
-                    Output.SelectionLength = 1;
-                    Output.SelectionColor = Color.Red;
+                    GetTrueCode();
                 }
-                Output.SelectAll();
-                Output.SelectionAlignment = HorizontalAlignment.Center;
-                Output.DeselectAll();
-                Application.DoEvents();
-                if (!reset) {
-                    StepsCount.Text = "" + (Convert.ToInt32(StepsCount.Text) + 1);
-                }
-            }
-            if (!reset)
-            {
-                if (!stillWorking)
+                stillWorking = true;
+                while (machine.memory_cache != "halt" && stillWorking)
                 {
+                    Thread.Sleep(Convert.ToInt32(delayBox.Text));
+                    Output.Text = machine.DoInstruction(machine.memory_cache, Output.Text);
+                    CurrState.Text = machine.memory_cache;
+                    if (machine.position >= 0 && machine.position < Output.Text.Length)
+                    {
+                        Output.SelectionStart = machine.position;
+                        Output.SelectionLength = 1;
+                        Output.SelectionColor = Color.Red;
+                    }
                     Output.SelectAll();
-                    Output.SelectionColor = Color.Orange;
+                    Output.SelectionAlignment = HorizontalAlignment.Center;
+                    Output.DeselectAll();
+                    Application.DoEvents();
+                    if (!reset)
+                    {
+                        StepsCount.Text = "" + (Convert.ToInt32(StepsCount.Text) + 1);
+                    }
                 }
-                else
+                if (!reset)
                 {
-                    Output.SelectAll();
-                    Output.SelectionColor = Color.Green;
+                    if (!stillWorking)
+                    {
+                        Output.SelectAll();
+                        Output.SelectionColor = Color.Orange;
+                    }
+                    else
+                    {
+                        Output.SelectAll();
+                        Output.SelectionColor = Color.Green;
+                    }
                 }
+                reset = false;
             }
-            reset = false;
+            
 
         }
 
@@ -78,9 +84,9 @@ namespace TuringMachine
             List<string> program = ProgramText.Text.Split(new char[] { '\n','\r' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             foreach (string line in program) {
                 if (line[0] != ';' || line[0] != ' ') {
-                        string[] temp_parts = new string[5];
-                        temp_parts = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        StatementBody body = new StatementBody();
+                    string[] temp_parts;
+                    temp_parts = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    StatementBody body = new StatementBody();
                     if (Convert.ToChar(temp_parts[1]) == '_')
                     {
                         body.first_arg = ' ';
@@ -98,11 +104,8 @@ namespace TuringMachine
                         body.second_arg = Convert.ToChar(temp_parts[2]);
                     }
                     body.dir = Convert.ToChar(temp_parts[3]);
-                        Statement st = new Statement();
-                        st.initial_st = temp_parts[0];
-                        st.end_st = temp_parts[4];
-                        st.body = body;
-                        machine.instructions.Add(st);
+                    Statement st = new Statement(temp_parts[0], temp_parts[4], body);
+                    machine.instructions.Add(st);
                 }
             }
             machine.memory_cache = machine.instructions[0].initial_st;
@@ -163,15 +166,7 @@ namespace TuringMachine
         }
     }
 
-    public class Statement {
-        public string initial_st;
-        public string end_st;
-        public StatementBody body;
-    }
+    
 
-    public class StatementBody {
-        public char first_arg;
-        public char second_arg;
-        public char dir;
-    }
+   
 }

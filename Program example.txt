@@ -1,0 +1,55 @@
+
+0 1 _ r 0
+0 # _ r q1
+
+q1 1 _ r q2
+q1 # _ r q8
+
+q2 1 1 r q2
+q2 # # r q2
+q2 _ _ l q3
+
+q3 1 1 l q3
+q3 # # r q4
+
+q4 1 # r q11
+q4 _ _ l q5
+
+q5 # _ l q5
+q5 1 1 l q14
+
+q6 1 1 l q6
+q6 # # l q6
+q6 _ _ r q1
+
+q7 1 1 l q7
+q7 # 1 r q12
+
+q8 1 1 r q8
+q8 # # r q8
+q8 _ _ l q9
+
+q9 1 _ l q9
+q9 # _ l q10
+
+q10 1 1 l q7
+q10 # _ l q10
+
+q11 1 1 l q6
+q11 _ _ l q5
+
+q12 1 1 r q12
+q12 _ _ l q13
+
+q13 1 _ l halt
+
+q14 1 1 l q14
+q14 # # l q14
+q14 _ _ r q15
+
+q15 # _ r q16
+q15 1 1 r q16
+
+q16 1 1 r q16
+q16 # # r q16
+q16 _ _ l q7

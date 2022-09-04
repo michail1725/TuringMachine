@@ -85,6 +85,7 @@
             // 
             // StartProgram
             // 
+            this.StartProgram.Enabled = false;
             this.StartProgram.Location = new System.Drawing.Point(440, 185);
             this.StartProgram.Name = "StartProgram";
             this.StartProgram.Size = new System.Drawing.Size(176, 23);
@@ -105,6 +106,7 @@
             // 
             // DoStep
             // 
+            this.DoStep.Enabled = false;
             this.DoStep.Location = new System.Drawing.Point(440, 214);
             this.DoStep.Name = "DoStep";
             this.DoStep.Size = new System.Drawing.Size(176, 23);
@@ -160,6 +162,7 @@
             // 
             // Reset
             // 
+            this.Reset.Enabled = false;
             this.Reset.Location = new System.Drawing.Point(440, 272);
             this.Reset.Name = "Reset";
             this.Reset.Size = new System.Drawing.Size(176, 23);
@@ -199,6 +202,7 @@
             // 
             // PauseCalc
             // 
+            this.PauseCalc.Enabled = false;
             this.PauseCalc.Location = new System.Drawing.Point(440, 243);
             this.PauseCalc.Name = "PauseCalc";
             this.PauseCalc.Size = new System.Drawing.Size(176, 23);

@@ -17,3 +17,13 @@ E:\Git\Repos\TuringMachine\TuringMachine\obj\Debug\TuringMachine.Properties.Reso
 E:\Git\Repos\TuringMachine\TuringMachine\obj\Debug\TuringMachine.csproj.GenerateResource.cache
 E:\Git\Repos\TuringMachine\TuringMachine\obj\Debug\TuringMachine.exe
 E:\Git\Repos\TuringMachine\TuringMachine\obj\Debug\TuringMachine.pdb
+E:\Git Clear Projects\В работе\TuringMachine\TuringMachine-master\TuringMachine\obj\Debug\TuringMachine.csproj.AssemblyReference.cache
+E:\Git Clear Projects\В работе\TuringMachine\TuringMachine-master\TuringMachine\obj\Debug\TuringMachine.Form1.resources
+E:\Git Clear Projects\В работе\TuringMachine\TuringMachine-master\TuringMachine\obj\Debug\TuringMachine.Properties.Resources.resources
+E:\Git Clear Projects\В работе\TuringMachine\TuringMachine-master\TuringMachine\obj\Debug\TuringMachine.csproj.GenerateResource.cache
+E:\Git Clear Projects\В работе\TuringMachine\TuringMachine-master\TuringMachine\obj\Debug\TuringMachine.csproj.CoreCompileInputs.cache
+E:\Git Clear Projects\В работе\TuringMachine\TuringMachine-master\TuringMachine\obj\Debug\TuringMachine.exe
+E:\Git Clear Projects\В работе\TuringMachine\TuringMachine-master\TuringMachine\obj\Debug\TuringMachine.pdb
+E:\Git Clear Projects\В работе\TuringMachine\TuringMachine-master\TuringMachine\bin\Debug\TuringMachine.exe.config
+E:\Git Clear Projects\В работе\TuringMachine\TuringMachine-master\TuringMachine\bin\Debug\TuringMachine.exe
+E:\Git Clear Projects\В работе\TuringMachine\TuringMachine-master\TuringMachine\bin\Debug\TuringMachine.pdb
